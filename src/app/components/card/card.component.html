@@ -1,0 +1,35 @@
+<form [formGroup]="cardForm">
+  <p-card header="Card Details" subheader="Please provide 13 or 16 digit card number" [style]="{ width: '360px',
+margin:'auto',marginTop:'5rem' }">
+
+    <div class="card flex flex-column md:flex-column gap-3">
+      <div class="card">
+        <p-messages [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
+      </div>
+      <div class="p-inputgroup">
+        <p-inputNumber placeholder="Card Number" inputId="integeronly" formControlName="creditCardNumber"
+          [style]="{width:'100%'}" [useGrouping]="false" [class]="isInvalid('creditCardNumber')?'ng-dirty':''">
+        </p-inputNumber>
+        <span class="p-inputgroup-addon" [style]="{padding:'1px'}">
+          <img alt="Card" width="46" height="46" [src]="imageUrl" />
+        </span>
+      </div>
+      <div class="card flex flex-row md:flex-row gap-2">
+        <div class="p-inputgroup">
+          <p-inputNumber placeholder="CVV" formControlName="cvv" inputId="integeronly" [useGrouping]="false"
+            [class]="isInvalid('cvv')?'ng-dirty':''">
+          </p-inputNumber>
+        </div>
+        <div class="p-inputgroup">
+          <p-calendar formControlName="expiryDate" [showIcon]="true" placeholder="Expiry Date" dateFormat="mm/yy"
+            [class]="isInvalid('expiryDate')?'ng-dirty':''"></p-calendar>
+        </div>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <div [style]="{textAlign:'right'}">
+        <p-button [label]="operationType === 'new'?'Save':'Validate'" (click)="validateCard()"></p-button>
+      </div>
+    </ng-template>
+  </p-card>
+</form>

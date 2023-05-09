@@ -1,0 +1,22 @@
+<div class="flex mb-3" [style]="{justifyContent:'right',gap:'0.5rem'}">
+    <p-button label="New" icon="pi pi-check" (click)="router.navigate(['card','new'])"></p-button>
+    <p-button label="Search" icon="pi pi-check" (click)="router.navigate(['card','search'])"></p-button>
+</div>
+<p-table [value]="cards" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Card Number</th>
+            <th>CVV</th>
+            <th>Expiry Date</th>
+            <th>Card Type</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-card>
+        <tr>
+            <td>{{ card.number }}</td>
+            <td>{{ card.cvv }}</td>
+            <td>{{ card.expiryDate }}</td>
+            <td>{{ card.type }}</td>
+        </tr>
+    </ng-template>
+</p-table>
