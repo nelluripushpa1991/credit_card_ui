@@ -10,6 +10,6 @@ export class CardService {
   constructor(private httpClient:HttpClient) { }
 
   saveCard(card:Card){
-     return this.httpClient.post('http://localhost:8080/api/card/credit',card);
+     return this.httpClient.post('/api/card/credit',card);
   }
 }
