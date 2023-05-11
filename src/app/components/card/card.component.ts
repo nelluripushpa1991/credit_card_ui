@@ -57,8 +57,13 @@ export class CardComponent implements OnInit {
       const oldcard: Card = JSON.parse(localStorage.getItem('card') as any);
       setTimeout(() => {
         const value: any = window.atob(oldcard.creditCardNumber ?? '');
-        if ("NaN" !== value && !isNaN(value))
+        if ("NaN" !== value && !isNaN(value)) {
           this.cardForm.get('creditCardNumber')?.setValue(value);
+          const oldCardType = this.getCardType(value);
+          this.cardForm.get('cardType')?.setValue(oldCardType);
+          this.imageUrl = this.getImageUrl();
+        }
+          
       }, 500);
     }
     setTimeout(() => {
