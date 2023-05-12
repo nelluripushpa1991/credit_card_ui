@@ -16,6 +16,7 @@
           <img alt="Card" width="46" height="46" [src]="imageUrl" />
         </span>
       </div>
+      <div *ngIf="isShow" style="color: red;">*Please enter valid number</div>
       <div class="card flex flex-row md:flex-row gap-2">
         <div class="p-inputgroup">
           <p-inputNumber placeholder="CVV" formControlName="cvv" inputId="integeronly" [useGrouping]="false"
@@ -23,10 +24,11 @@
           </p-inputNumber>
         </div>
         <div class="p-inputgroup">
-          <p-calendar formControlName="expiryDate" [showIcon]="true" placeholder="Expiry Date" dateFormat="mm/yy"
+          <p-calendar formControlName="expiryDate" [showIcon]="true" [minDate]="minDate" placeholder="Expiry Date" dateFormat="mm/yy" [readonlyInput]="true"
             [class]="isInvalid('expiryDate')?'ng-dirty':''"></p-calendar>
         </div>
       </div>
+      <div *ngIf="isShow" style="color: red;">*Please enter valid {{isShow}}</div>
     </div>
     <ng-template pTemplate="footer">
       <div [style]="{textAlign:'right'}">

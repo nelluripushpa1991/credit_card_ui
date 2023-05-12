@@ -48,7 +48,9 @@ export class CardComponent implements OnInit {
   operationType: string | null = "new";
   messages: Message[] = [];
   imageUrl: string = ImageUrls.INVALID_IMAGE_URL;
-  requiredValue: string | null | undefined;
+  isShow: boolean | undefined = false;
+  minDate: Date = new Date();
+
 
   constructor(private cardService: CardService, private route: ActivatedRoute, private fb: FormBuilder) { }
 
@@ -125,6 +127,9 @@ export class CardComponent implements OnInit {
 
   isInvalid(controlName: string): boolean | undefined {
     const status = (this.cardForm.get(controlName)?.status === 'INVALID' && this.cardForm.get(controlName)?.touched);
+    if(controlName !== "expiryDate") {
+      this.isShow = status;
+    }
     return status;
   }
 
