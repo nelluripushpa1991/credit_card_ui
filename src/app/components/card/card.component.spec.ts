@@ -17,6 +17,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { MessagesModule } from 'primeng/messages';
 import { Card } from './card';
 import { formAmericanExpressCard, formInvalidCard, formMasterCard, formVisaCard, invalidErrorResponse, invalidErrorResponseData, visaCard, visaResponse } from 'src/mocks/mockCard';
+import { CardTypes, ImageUrls } from '../../../enums/enum';
 
 describe('CardComponent', () => {
   let component: CardComponent;
@@ -62,21 +63,21 @@ describe('CardComponent', () => {
   });
 
   it('should getCardType() as VISA, MASTER CARD, AMERICAN EXPRESS, EMPTY', () => {
-    expect(component.getCardType(4)).toBe("VISA");
-    expect(component.getCardType(5)).toBe("MASTER CARD");
-    expect(component.getCardType(37)).toBe("AMERICAN EXPRESS");
-    expect(component.getCardType(1)).toBe("EMPTY");
+    expect(component.getCardType(4)).toBe(CardTypes.VISA);
+    expect(component.getCardType(5)).toBe(CardTypes.MASTER_CARD);
+    expect(component.getCardType(37)).toBe(CardTypes.AMERICAN_EXPRESS);
+    expect(component.getCardType(1)).toBe(CardTypes.INVALID);
   });
 
   it('should getImageUrl() for VISA', () => {
     component.cardForm.setValue(formVisaCard);
-      expect(component.getImageUrl()).toBe("../assets/visacard.png");
+      expect(component.getImageUrl()).toBe(ImageUrls.VISA_IMAGE_URL);
     component.cardForm.setValue(formMasterCard);
-     expect(component.getImageUrl()).toBe("../assets/mastercard.jpg");
+     expect(component.getImageUrl()).toBe(ImageUrls.MASTER_CARD_IMAGE_URL);
     component.cardForm.setValue(formAmericanExpressCard);
-      expect(component.getImageUrl()).toBe("../assets/americanexpresscard.jpeg");
+      expect(component.getImageUrl()).toBe(ImageUrls.AMERICAN_EXPRESS_IMAGE_URL);
     component.cardForm.setValue(formInvalidCard);
-     expect(component.getImageUrl()).toBe("../assets/invalidcard.jpeg");
+     expect(component.getImageUrl()).toBe(ImageUrls.INVALID_IMAGE_URL);
   });
 
   it('should be isInvalid() ', () => {

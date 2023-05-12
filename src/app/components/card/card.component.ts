@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Card } from './card';
 import { CardService } from './card.service';
 import { Message } from 'primeng/api';
+import { CardTypes, ImageUrls } from '../../../enums/enum';
+import { Observable } from 'rxjs';
 
 // this function checks wheather card number length should be between 13 and 16 digits are not
 const validateCardNumber = (): ValidatorFn => {
@@ -45,7 +47,8 @@ export class CardComponent implements OnInit {
   // to identify new newly entered card or not
   operationType: string | null = "new";
   messages: Message[] = [];
-  imageUrl: string = '../assets/invalidcard.jpeg';
+  imageUrl: string = ImageUrls.INVALID_IMAGE_URL;
+  requiredValue: string | null | undefined;
 
   constructor(private cardService: CardService, private route: ActivatedRoute, private fb: FormBuilder) { }
 
@@ -79,9 +82,9 @@ export class CardComponent implements OnInit {
   // logic to get image path based on cardtype
   getImageUrl() {
     const cardtype: string = this.cardForm.get('cardType')?.value;
-    return cardtype === 'VISA' ? '../assets/visacard.png' :
-      cardtype === 'MASTER CARD' ? '../assets/mastercard.jpg' :
-        cardtype === 'AMERICAN EXPRESS' ? '../assets/americanexpresscard.jpeg' :
+    return cardtype === CardTypes.VISA ? '../assets/visacard.png' :
+      cardtype === CardTypes.MASTER_CARD ? '../assets/mastercard.jpg' :
+        cardtype === CardTypes.AMERICAN_EXPRESS ? '../assets/americanexpresscard.jpeg' :
           '../assets/invalidcard.jpeg';
   }
 
@@ -90,10 +93,10 @@ export class CardComponent implements OnInit {
     if (input > 10) {
       const twoDigits: number = parseInt(Number(input).toString().split('').splice(0, 2).join(''));
       if (twoDigits === 37)
-        return "AMERICAN EXPRESS";
+        return CardTypes.AMERICAN_EXPRESS;
     }
     const firstDigit: number = input > 10 ? parseInt(input.toString().charAt(0)) : input;
-    return firstDigit === 4 ? 'VISA' : firstDigit === 5 ? "MASTER CARD" : "EMPTY";
+    return firstDigit === 4 ? CardTypes.VISA : firstDigit === 5 ? CardTypes.MASTER_CARD : CardTypes.INVALID;
   }
 
   // logic to store card number into localstorage to diaply the same value after refresh also
@@ -105,18 +108,15 @@ export class CardComponent implements OnInit {
 
   // logic to display appropriate message based success response
   handleValidate(response: any) {
-    if (response.message != null && response.message != "") {
-      if (response.message == "VALID") {
-        this.messages = [{ severity: 'success', summary: 'Success', detail: response.message }];
-      } else {
-        this.messages = [{ severity: 'error', summary: 'Error', detail: response.message }];
-      }
+    if (response != null && response != "") {
+      if (!isNaN(response.id)) {
+        this.messages = [{ severity: 'success', summary: 'Success', detail: "Credit Card is Valid" }];
+      } 
     }
   }
 
   // logic to display appropriate message based error response
   handleError(errorResponse: any) {
-    console.log("errorResponse : "+JSON.stringify(errorResponse));
     if (errorResponse !== null && errorResponse !== "") {
       this.messages = [{ severity: 'error', summary: 'Error', detail: errorResponse.error.message }];
     }
@@ -136,7 +136,7 @@ export class CardComponent implements OnInit {
         error: this.handleError.bind(this)
       });
     } else {
-      this.messages = [{ severity: 'error', summary: 'Error', detail: 'Please Enter Required Fields' }];
+      this.messages = [{ severity: 'error', summary: 'Error', detail: 'Please Enter Valid Data' }];
     }
   }
 }

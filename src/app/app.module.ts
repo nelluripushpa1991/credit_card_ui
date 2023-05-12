@@ -15,6 +15,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { TableModule } from 'primeng/table';
 import { CardListComponent } from './components/card-list/card-list.component';
 import { MessagesModule } from 'primeng/messages';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -22,7 +24,9 @@ import { MessagesModule } from 'primeng/messages';
   declarations: [
     AppComponent,
     CardComponent,
-    CardListComponent
+    CardListComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     CardModule,

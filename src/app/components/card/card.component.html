@@ -1,7 +1,9 @@
 <form [formGroup]="cardForm">
-  <p-card header="Card Details" subheader="Please provide 13 to 16 digit card number" [style]="{ width: '360px',
-margin:'auto',marginTop:'5rem' }">
-
+  <p-card header="Card Details" subheader="Please provide 13 to 16 digit card number" 
+  [style]="{ width: '360px', margin:'auto', marginTop:'5rem' }">
+  <ng-template pTemplate="header">
+    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+  </ng-template>
     <div class="card flex flex-column md:flex-column gap-3">
       <div class="card">
         <p-messages [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
