@@ -120,7 +120,6 @@ export class CardComponent implements OnInit {
 
   // logic to display appropriate message based error response
   handleError(errorResponse: any) {
-    console.log("errorresponse "+JSON.stringify(errorResponse));
     if (errorResponse !== null && errorResponse !== "") {
       this.messages = [{ severity: 'error', summary: 'Error', detail: errorResponse.statusText }];
     }
