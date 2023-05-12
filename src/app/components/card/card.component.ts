@@ -49,6 +49,7 @@ export class CardComponent implements OnInit {
   messages: Message[] = [];
   imageUrl: string = ImageUrls.INVALID_IMAGE_URL;
   isShow: boolean | undefined = false;
+  isShowExpiryDate: boolean | undefined = false;
   minDate: Date = new Date();
 
 
@@ -129,6 +130,8 @@ export class CardComponent implements OnInit {
     const status = (this.cardForm.get(controlName)?.status === 'INVALID' && this.cardForm.get(controlName)?.touched);
     if(controlName !== "expiryDate") {
       this.isShow = status;
+    } else {
+      this.isShowExpiryDate = status
     }
     return status;
   }
