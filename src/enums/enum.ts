@@ -6,8 +6,8 @@ enum CardTypes {
   }
   
   enum ImageUrls {
-    VISA_IMAGE_URL = '../assets/visacard.jpeg',
-    MASTER_CARD_IMAGE_URL = '../assets/mastercard.jpeg',
+    VISA_IMAGE_URL = '../assets/visacard.png',
+    MASTER_CARD_IMAGE_URL = '../assets/mastercard.jpg',
     AMERICAN_EXPRESS_IMAGE_URL = '../assets/americanexpresscard.jpeg',
     INVALID_IMAGE_URL = '../assets/invalidcard.jpeg',
   }

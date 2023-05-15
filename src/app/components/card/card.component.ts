@@ -85,10 +85,10 @@ export class CardComponent implements OnInit {
   // logic to get image path based on cardtype
   getImageUrl() {
     const cardtype: string = this.cardForm.get('cardType')?.value;
-    return cardtype === CardTypes.VISA ? '../assets/visacard.png' :
-      cardtype === CardTypes.MASTER_CARD ? '../assets/mastercard.jpg' :
-        cardtype === CardTypes.AMERICAN_EXPRESS ? '../assets/americanexpresscard.jpeg' :
-          '../assets/invalidcard.jpeg';
+    return cardtype === CardTypes.VISA ? ImageUrls.VISA_IMAGE_URL :
+      cardtype === CardTypes.MASTER_CARD ? ImageUrls.MASTER_CARD_IMAGE_URL :
+        cardtype === CardTypes.AMERICAN_EXPRESS ? ImageUrls.AMERICAN_EXPRESS_IMAGE_URL :
+          ImageUrls.INVALID_IMAGE_URL;
   }
 
   // logic to get cardtype based on number series
